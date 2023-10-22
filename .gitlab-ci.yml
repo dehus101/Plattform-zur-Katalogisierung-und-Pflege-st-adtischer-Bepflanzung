@@ -1,0 +1,3 @@
+include:
+  - project: 'dbsinfo/teaching/datenbanken-weiterfuehrende-konzepte/project/specification'
+    file: '/.gitlab-ci.submit.yml'

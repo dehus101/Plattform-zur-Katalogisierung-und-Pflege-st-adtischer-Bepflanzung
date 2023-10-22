@@ -1,0 +1,10 @@
+server:
+  port: ${PROJECT_TEMPLATE_URL_PORT}
+
+spring:
+  datasource:
+    url: jdbc:sqlite:data/database.db
+
+logging:
+  level:
+    org.springframework: debug
