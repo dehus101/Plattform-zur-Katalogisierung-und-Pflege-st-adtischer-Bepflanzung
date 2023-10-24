@@ -2,11 +2,13 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven {
-            name = "GitHhuGroup8698"
-            setUrl("https://git.hhu.de/api/v4/groups/8698/-/packages/maven")
+            val groupId = providers.gradleProperty("de.hhu.git.group.id").get()
+            val deployToken = providers.gradleProperty("de.hhu.git.group.deploy-token").get()
+            name = "GitHhuGroup$groupId"
+            setUrl("https://git.hhu.de/api/v4/groups/$groupId/-/packages/maven")
             credentials(HttpHeaderCredentials::class) {
                 name = "Deploy-Token"
-                value = "FU6y94JWmErw9EyR9Wxh"
+                value = deployToken
             }
             authentication { register("header", HttpHeaderAuthentication::class) }
         }
@@ -19,11 +21,13 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         maven {
-            name = "GitHhuGroup8698"
-            setUrl("https://git.hhu.de/api/v4/groups/8698/-/packages/maven")
+            val groupId = providers.gradleProperty("de.hhu.git.group.id").get()
+            val deployToken = providers.gradleProperty("de.hhu.git.group.deploy-token").get()
+            name = "GitHhuGroup$groupId"
+            setUrl("https://git.hhu.de/api/v4/groups/$groupId/-/packages/maven")
             credentials(HttpHeaderCredentials::class) {
                 name = "Deploy-Token"
-                value = "FU6y94JWmErw9EyR9Wxh"
+                value = deployToken
             }
             authentication { register("header", HttpHeaderAuthentication::class) }
         }
