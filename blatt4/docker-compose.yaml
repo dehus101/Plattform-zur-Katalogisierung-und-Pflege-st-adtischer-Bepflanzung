@@ -1,18 +1,18 @@
 name: dbs-dbwk-project
 
 services:
-  template:
+  implementation:
     build:
       context: ./
       args:
         - JAVA_VERSION=${JAVA_VERSION:-17}
-    container_name: dbs-dbwk-project-template
+    container_name: dbs-dbwk-project-implementation
     env_file: .env
     expose:
-      - "${PROJECT_TEMPLATE_URL_PORT:-8080}"
+      - "${PROJECT_IMPLEMENTATION_URL_PORT:-8080}"
     image: dbs-dbwk-project-template:latest
     ports:
-      - "${PROJECT_TEMPLATE_URL_PORT:-8080}:${PROJECT_TEMPLATE_URL_PORT:-8080}"
+      - "${PROJECT_IMPLEMENTATION_URL_PORT:-8080}:${PROJECT_IMPLEMENTATION_URL_PORT:-8080}"
     volumes:
       - ./data:/app/data
   specification:
@@ -27,7 +27,7 @@ services:
     ports:
       - "${PROJECT_SPECIFICATION_URL_PORT:-8090}:${PROJECT_SPECIFICATION_URL_PORT:-8090}"
     volumes:
-      - ./build/specification/openapi.yaml:/usr/share/nginx/html/openapi.yaml
+      - ./build/blatt4/openapi.yaml:/usr/share/nginx/html/openapi.yaml
 
 networks:
   default:

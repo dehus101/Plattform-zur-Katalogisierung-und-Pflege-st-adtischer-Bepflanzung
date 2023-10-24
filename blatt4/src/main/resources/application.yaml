@@ -1,5 +1,5 @@
 server:
-  port: ${PROJECT_TEMPLATE_URL_PORT}
+  port: ${PROJECT_IMPLEMENTATION_URL_PORT}
 
 spring:
   datasource:
