@@ -1,4 +1,6 @@
-# 1. Phase: Erstellen eines ER-Modells der Datenbank
+# Blatt 1
+
+Erstellen eines ER-Modells der Datenbank
 
 ## Kritische Entscheidungen
 

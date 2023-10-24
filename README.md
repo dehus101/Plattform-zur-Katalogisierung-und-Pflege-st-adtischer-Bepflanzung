@@ -14,4 +14,4 @@ Dieses Template muss als Gradle-Projekt in einer IDE importiert werden.
 
 ## Kritische Entscheidungen
 
-Kritische Entscheidungen zu den einzelnen Phasen listen Sie bitte in der `README` der entsprechenden Phase auf.
+Kritische Entscheidungen zu den einzelnen Blättern listen Sie bitte in der `README` des entsprechenden Blatts auf.
