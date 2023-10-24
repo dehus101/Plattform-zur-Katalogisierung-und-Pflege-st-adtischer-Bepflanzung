@@ -19,7 +19,6 @@ tasks.bootRun {
 tasks.composeBuild { context.setFrom(tasks.bootJar) }
 
 dependencies {
-    specification(libs.specification)
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
