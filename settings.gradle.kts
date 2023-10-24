@@ -33,10 +33,10 @@ dependencyResolutionManagement {
         register("libs") { from("de.hhu.cs.dbs.dbwk.project:versioncatalog:latest.integration") }
     }
 
-    include("phase1")
-    include("phase2")
-    include("phase3")
-    include("phase4")
+    include("blatt1")
+    include("blatt2")
+    include("blatt3")
+    include("blatt4")
 }
 
 rootProject.name = "template"
