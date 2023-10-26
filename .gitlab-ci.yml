@@ -1,3 +1,4 @@
-include:
-  - project: '${CI_PROJECT_NAMESPACE}/pipeline'
-    file: '/.gitlab-ci.yml'
+submit solution:
+  trigger:
+    project: ${CI_PROJECT_NAMESPACE}/pipeline
+    strategy: depend
