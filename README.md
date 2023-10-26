@@ -10,7 +10,7 @@ Es muss **mindestens Java 8** installiert sein.
 
 Dieses Template muss als Gradle-Projekt in einer IDE importiert werden.
 
-> 🚨 Die Datei `.gitlab-ci.yml` darf nicht verändert werden!
+> ⚠️ CI/CD ist für Sie konfiguriert, findet bei jedem Push statt und kann nicht geändert werden!
 
 ## Kritische Entscheidungen
 
