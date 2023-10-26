@@ -1,8 +1,0 @@
-stages:
-  - submit
-
-submit solution:
-  stage: submit
-  trigger:
-    project: ${CI_PROJECT_NAMESPACE}/pipeline
-    strategy: depend
