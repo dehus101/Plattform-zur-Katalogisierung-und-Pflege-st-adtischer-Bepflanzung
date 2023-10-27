@@ -1,17 +1,17 @@
-# Datenbanken: Weiterführende Konzepte – Praktisches Projekt – Template
+# Datenbanken: Weiterführende Konzepte – Praktisches Projekt – Abgabe
 
-Dies ist das Template für das praktische Projekt im Modul "Datenbanken: Weitereführende Konzepte".
-
-## Anforderungen
-
-Es muss **mindestens Java 8** installiert sein.
+Dies ist die Vorlage zur Abgabe für das praktische Projekt im Modul "Datenbanken: Weitereführende Konzepte".
 
 ## Einrichtung
 
-Dieses Template muss als Gradle-Projekt in einer IDE importiert werden.
+Es muss **mindestens Java 8** installiert sein.
 
-> ⚠️ CI/CD ist für Sie konfiguriert, findet bei jedem Push statt und kann nicht geändert werden!
+Zur besseren Handhabung sollte dieses Repository als Gradle-Projekt in eine IDE importiert werden.
 
-## Kritische Entscheidungen
+## Hinweise
 
-Kritische Entscheidungen zu den einzelnen Blättern listen Sie bitte in der `README` des entsprechenden Blatts auf.
+Die Aufgabenstellung finden Sie im Repository des entsprechenden Blatts.
+
+Kritische Entscheidungen zu den einzelnen Blättern listen Sie bitte in der `README` im zum entsprechenden Blatt zugehörigen Ordner auf.
+
+Die Abgabe erfolgt bei jedem Push in Ihr Repository per CI/CD.
