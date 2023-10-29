@@ -16,7 +16,7 @@ Im folgenden werden alle Entscheidungen bezüglich der Modellierung des ER-Model
 ### Entitäten
 
 - Es ist keine Mehrfachbewertung nötig, deshalb wird die Bewertung nicht als seperate Entität ausgelagert und ist dann in der Form:
- Gärtner - [0,*] - bewertet - [0,*]  - Pflegemaßname
+ Gärtner - (0,*) - bewertet - (0,*)  - Pflegemaßname
 - Entity Nutzer:
  - Attribut Email ist Primärschlüssel, weil es eindeutig ist. (Ich hätte eigentlich einen Attribut Benutzername als Primär markieren gewählt, aber die Aufgabenstellung sagt Email ;D)
 - Entity Pflanze:
