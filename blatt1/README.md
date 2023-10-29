@@ -17,10 +17,13 @@ Im folgenden werden alle Entscheidungen bezüglich der Modellierung des ER-Model
 
 - Es ist keine Mehrfachbewertung nötig, deshalb wird die Bewertung nicht als seperate Entität ausgelagert und ist dann in der Form:
  `Gärtner - [0,*] - bewertet - [0,*]  - Pflegemaßname`
+
 Entity Nutzer:
 - Attribut Email ist Primärschlüssel, weil es eindeutig ist. (Ich hätte eigentlich einen Attribut Benutzername als Primär markieren gewählt, aber die Aufgabenstellung sagt Email ;D)
+
 Entity Pflanze:
 - Attribut Pflanzdatum ist optional.
+
 Entity Pflegeprotokoll:
 - Ich habe mich dazu entschieden, dass das Atribut Erfolg ein Beziehungsattribut wird und kein Attribut von Pflegeprotokoll. Jede Pflegemassnahme, die in einem Pflegeprotokoll vorkommt, wird mit einem Erfolg bewertet. Die genannte "Information über Pflegemaßnahme" soll das Attribut Beschreibung an der Entity Pflegemassnahme sein.
    Durch Verschmelzungen der Tabellen Gaertner, Pflegemassnahme und Pflegeprotokoll kommt der Gärtner an das Beziehungsattribut Erfolg (falls Erfolg die Bewertung ist),
