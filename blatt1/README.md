@@ -28,10 +28,10 @@ Im folgenden werden alle Entscheidungen bezüglich der Modellierung des ER-Model
 
 
 ### Relationen
-- Relation _hat_ mit teilnehmenden Entities: _Buerger_ und _Wohnort_ (1:N):
+-- Relation _hat_ mit teilnehmenden Entities: _Buerger_ und _Wohnort_ (1:N):
  - [1,1]: Ein Buerger hat genau einen Wohnort.
  - [0,*]: Ein Wohnort kann keine oder mehrere Buerger haben.
-- Relation _traegt_ein mit teilnehmenden Entities: _Buerger_ und _Pflanze_ (1:N):
+-- Relation _traegt_ein mit teilnehmenden Entities: _Buerger_ und _Pflanze_ (1:N):
  - [0,*]: Ein Buerger kann mehrere Pflanzen eintragen oder auch keine.
  - [1,1]: Eine Pflanze wird genau von einem Bürger eingetragen.
 - Relation _wachst_ mit teilnehmenden Entities: _Pflanze_ und _Standort_ (1:N):
