@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Datenbanken: Weiterführende Konzepte - Praktisches Projekt - Blatt 2</title>
+    <meta charset="UTF-8">
+    <link href="css/rm.css" rel="stylesheet">
+    <script src="js/rm.js"></script>
+</head>
+<body>
+<h1>hehei100</h1>
+<rm-model name="Relationenmodell vor Verschmelzung">
+    <rm-schema name="Korrektor">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+            <rm-attribute>Name</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Sprechzeit</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Student">
+        <rm-primary-key>
+            <rm-attribute>Uni-Kennung</rm-attribute>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="KorrektorBewertetStudent">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Student.Uni-Kennung</rm-attribute>
+            </rm-foreign-key>
+            <rm-foreign-key>
+                <rm-attribute>Korrektor.ID</rm-attribute>
+                <rm-attribute>Korrektor.Name</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+</rm-model>
+<rm-model name="Relationenmodell nach Verschmelzung">
+    ...
+</rm-model>
+</body>
+</html>
