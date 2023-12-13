@@ -64,11 +64,26 @@ CREATE TABLE IF NOT EXISTS Wohnort (
     ID INTEGER NOT NULL,
     Stadt VARCHAR(256) COLLATE NOCASE NOT NULL,
     Strasse VARCHAR(256) COLLATE NOCASE NOT NULL,
-    Hausnummer INTEGER NOT NULL,
+    Hausnummer VARCHAR(5) COLLATE NOCASE NOT NULL,
     PLZ INTEGER NOT NULL,
     PRIMARY KEY (ID)
 );
 
+CREATE TABLE IF NOT EXISTS Pflegeart (
+    ID INTEGER NOT NULL,
+    Art VARCHAR(256)
+        COLLATE NOCASE
+        UNIQUE
+        NOT NULL
+        CHECK (
+            (Art NOT LIKE '%[^ -~]%')
+            AND (LENGTH(Art)>0)
+        ),
+    PRIMARY KEY (ID)
+
+);
+
+/* Die Bezeichnung der Pflegeart besteht nur aus Zeichen des lateinischen Alphabets. ✅ */
 CREATE TABLE IF NOT EXISTS Pflegemassnahme (
     ID INTEGER NOT NULL,
     Datum DATETIME NOT NULL
@@ -84,20 +99,6 @@ CREATE TABLE IF NOT EXISTS Pflegemassnahme (
     ON DELETE CASCADE
 );
 
-/* Die Bezeichnung der Pflegeart besteht nur aus Zeichen des lateinischen Alphabets. ✅ */
-CREATE TABLE IF NOT EXISTS Pflegeart (
-    ID INTEGER NOT NULL,
-    Art VARCHAR(256)
-        COLLATE NOCASE
-        NOT NULL
-        CHECK (
-            (Art NOT LIKE '%[^ -~]%')
-            AND (LENGTH(Art)>0)
-        ),
-    PRIMARY KEY (ID)
-
-);
-
 CREATE TABLE IF NOT EXISTS Pflegeprotokoll (
     ID INTEGER NOT NULL,
     Email VARCHAR(256)
@@ -110,6 +111,33 @@ CREATE TABLE IF NOT EXISTS Pflegeprotokoll (
 
 );
 
+CREATE TABLE IF NOT EXISTS Standort (
+    ID INTEGER NOT NULL,
+    Breitengrad VARCHAR(256)
+        COLLATE NOCASE
+        NOT NULL,
+    Laengengrad VARCHAR(256)
+        COLLATE NOCASE
+        NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+
+
+CREATE TABLE IF NOT EXISTS Pflanzentyp (
+    ID INTEGER NOT NULL,
+    Typ VARCHAR(256)
+        COLLATE NOCASE
+        UNIQUE
+        NOT NULL
+        CHECK (
+            (Typ NOT LIKE '%[^ -~]%')
+            AND (LENGTH(Typ)>0)
+        ),
+    PRIMARY KEY (ID)
+);
+
+/* Die Bezeichnung der Pflanzentyp besteht nur aus Zeichen des lateinischen Alphabets. ✅ */
 CREATE TABLE IF NOT EXISTS Pflanze (
     ID INTEGER NOT NULL,
     'lateinische Bezeichnung' VARCHAR(256) COLLATE NOCASE NOT NULL,
@@ -125,31 +153,6 @@ CREATE TABLE IF NOT EXISTS Pflanze (
     FOREIGN KEY (Pflanzentyp) REFERENCES Pflanzentyp (ID)
     ON UPDATE CASCADE
     ON DELETE CASCADE
-);
-
-
-
-CREATE TABLE IF NOT EXISTS Standort (
-    ID INTEGER NOT NULL,
-    Breitengrad VARCHAR(256)
-        COLLATE NOCASE
-        NOT NULL,
-    Laengengrad VARCHAR(256)
-        COLLATE NOCASE
-        NOT NULL,
-    PRIMARY KEY (ID)
-);
-/* Die Bezeichnung der Pflanzentyp besteht nur aus Zeichen des lateinischen Alphabets. ✅ */
-CREATE TABLE IF NOT EXISTS Pflanzentyp (
-    ID INTEGER NOT NULL,
-    Typ VARCHAR(256)
-        COLLATE NOCASE
-        NOT NULL
-        CHECK (
-            (Typ NOT LIKE '%[^ -~]%')
-            AND (LENGTH(Typ)>0)
-        ),
-    PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS Bild (
@@ -170,6 +173,7 @@ CREATE TABLE IF NOT EXISTS Spezialisierung (
     ID INTEGER NOT NULL,
     Name VARCHAR(256)
         COLLATE NOCASE
+        UNIQUE
         NOT NULL
         CHECK (
             (Name NOT LIKE '%[^ -~]%')
@@ -256,7 +260,7 @@ CREATE TABLE IF NOT EXISTS Gaertner_pflanzt_Pflanze (
     Email VARCHAR(256)
         COLLATE NOCASE
         NOT NULL,
-    Pflanzdatum DATE NOT NULL
+    Pflanzdatum DATE
         CHECK ( Pflanzdatum IS DATE(Pflanzdatum) ),
     PRIMARY KEY (Pflanze),
     FOREIGN KEY (Pflanze) REFERENCES Pflanze (ID),
