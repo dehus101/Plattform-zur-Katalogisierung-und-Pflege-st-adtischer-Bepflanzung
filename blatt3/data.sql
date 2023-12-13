@@ -1,42 +1,39 @@
 INSERT INTO Nutzer (Email, Vorname, Nachname, Passwort)
 VALUES
   ('johndoe@example.com', 'John', 'Doe', 'AbCd1234'),
-  ('janesmith@example.com', 'Jane', 'Smith', 'XyZ45678');
+  ('janedoe@example.com', 'Jane', 'Doe', 'EfGh5678'),
+  ('johnsmith@example.com', 'John', 'Smith', 'AbCd1234'),
+  ('janesmith@example.com', 'Jane', 'Smith', 'EfGh5678');
+
+INSERT INTO Wohnort (ID, Stadt, Strasse, Hausnummer, PLZ)
+VALUES
+  (1, 'Musterstadt', 'Musterstraße', '123', 12345),
+  (2, 'Beispielstadt', 'Beispielstraße', '456', 67890);
 
 INSERT INTO Buerger (Email, Wohnort)
 VALUES
   ('johndoe@example.com', 1),
-  ('janesmith@example.com', 2);
+  ('johnsmith@example.com', 2);
 
 INSERT INTO Gaertner (Email)
 VALUES
-  ('johndoe@example.com'),
+  ('janedoe@example.com'),
   ('janesmith@example.com');
-
-INSERT INTO Wohnort (ID, Stadt, Strasse, Hausnummer, PLZ)
-VALUES
-  (1, 'Musterstadt', 'Musterstraße', 123, 12345),
-  (2, 'Beispielstadt', 'Beispielstraße', 456, 67890);
-
-INSERT INTO Pflegemassnahme (ID, Datum, Pflegeart, Email)
-VALUES
-  (1, '2023-01-15 10:00:00', 1, 'johndoe@example.com'),
-  (2, '2023-02-20 14:30:00', 2, 'janesmith@example.com');
 
 INSERT INTO Pflegeart (ID, Art)
 VALUES
   (1, 'Gießen'),
   (2, 'Düngen');
 
+INSERT INTO Pflegemassnahme (ID, Datum, Pflegeart, Email)
+VALUES
+  (1, '2023-01-15 10:00:00', 1, 'janedoe@example.com'),
+  (2, '2023-02-20 14:30:00', 2, 'janesmith@example.com');
+
 INSERT INTO Pflegeprotokoll (ID, Email)
 VALUES
-  (1, 'johndoe@example.com'),
+  (1, 'janedoe@example.com'),
   (2, 'janesmith@example.com');
-
-INSERT INTO Pflanze (ID, 'lateinische Bezeichnung', 'deutsche Bezeichnung', Email, Standort, Pflanzentyp)
-VALUES
-  (1, 'Lavandula angustifolia', 'Lavendel', 'johndoe@example.com', 1, 1),
-  (2, 'Rosa gallica', 'Gallische Rose', 'janesmith@example.com', 2, 2);
 
 INSERT INTO Standort (ID, Breitengrad, Laengengrad)
 VALUES
@@ -47,6 +44,11 @@ INSERT INTO Pflanzentyp (ID, Typ)
 VALUES
   (1, 'Zierpflanze'),
   (2, 'Obstpflanze');
+
+INSERT INTO Pflanze (ID, 'lateinische Bezeichnung', 'deutsche Bezeichnung', Email, Standort, Pflanzentyp)
+VALUES
+  (1, 'Lavandula angustifolia', 'Lavendel', 'johndoe@example.com', 1, 1),
+  (2, 'Rosa gallica', 'Gallische Rose', 'johnsmith@example.com', 2, 2);
 
 INSERT INTO Bild (ID, Bildpfad, Pflanze)
 VALUES
@@ -61,7 +63,7 @@ VALUES
 INSERT INTO Buerger_teilnehmen_Pflegemassnahme (Email, Pflegemassnahme)
 VALUES
   ('johndoe@example.com', 1),
-  ('janesmith@example.com', 2);
+  ('johnsmith@example.com', 2);
 
 INSERT INTO Pflegemassnahme_referenzieren (Pflegemassnahme1, Pflegemassnahme2)
 VALUES
@@ -75,7 +77,7 @@ VALUES
 
 INSERT INTO Gaertner_bewertet_Pflegemassnahme (Pflegemassnahme, Email, Skala)
 VALUES
-  (1, 'johndoe@example.com', 4),
+  (1, 'janedoe@example.com', 4),
   (2, 'janesmith@example.com', 5);
 
 INSERT INTO Pflegemassnahme_versorgt_Pflanze (Pflegemassnahme, Pflanze)
@@ -85,10 +87,10 @@ VALUES
 
 INSERT INTO Gaertner_pflanzt_Pflanze (Pflanze, Email, Pflanzdatum)
 VALUES
-  (1, 'johndoe@example.com', '2023-03-01'),
+  (1, 'janedoe@example.com', '2023-03-01'),
   (2, 'janesmith@example.com', '2023-04-15');
 
 INSERT INTO Gaertner_hat_Spezialisierung (Email, Spezialisierung)
 VALUES
-  ('johndoe@example.com', 1),
+  ('janedoe@example.com', 1),
   ('janesmith@example.com', 2);
