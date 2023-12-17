@@ -7,8 +7,8 @@ VALUES
 
 INSERT INTO Wohnort (ID, Stadt, Strasse, Hausnummer, PLZ)
 VALUES
-  (1, 'Musterstadt', 'Musterstraße', '123', 12345),
-  (2, 'Beispielstadt', 'Beispielstraße', '456', 67890);
+  (1, 'Musterstadt', 'Musterstraße', 123, 12345),
+  (2, 'Beispielstadt', 'Beispielstraße', 456, 67890);
 
 INSERT INTO Buerger (Email, Wohnort)
 VALUES
@@ -37,15 +37,15 @@ VALUES
 
 INSERT INTO Standort (ID, Breitengrad, Laengengrad)
 VALUES
-  (1, '51.12345', '10.98765'),
-  (2, '48.54321', '9.87654');
+  (1, 51.12345, 10.98765),
+  (2, 48.54321, 9.87654);
 
 INSERT INTO Pflanzentyp (ID, Typ)
 VALUES
   (1, 'Zierpflanze'),
   (2, 'Obstpflanze');
 
-INSERT INTO Pflanze (ID, 'lateinische Bezeichnung', 'deutsche Bezeichnung', Email, Standort, Pflanzentyp)
+INSERT INTO Pflanze (ID, lateinische_Bezeichnung, deutsche_Bezeichnung, Email, Standort, Pflanzentyp)
 VALUES
   (1, 'Lavandula angustifolia', 'Lavendel', 'johndoe@example.com', 1, 1),
   (2, 'Rosa gallica', 'Gallische Rose', 'johnsmith@example.com', 2, 2);
@@ -60,15 +60,14 @@ VALUES
   (1, 'Kräutergarten'),
   (2, 'Rosengarten');
 
-INSERT INTO Buerger_teilnehmen_Pflegemassnahme (Email, Pflegemassnahme)
-VALUES
-  ('johndoe@example.com', 1),
-  ('johnsmith@example.com', 2);
-
+-- Pflegemassnahme 1 setzt Pflegemassnahme 2 als Voraussetzung
 INSERT INTO Pflegemassnahme_referenzieren (Pflegemassnahme1, Pflegemassnahme2)
 VALUES
-  (1, 2),
-  (2, 1);
+  (1, 2);
+
+INSERT INTO Buerger_teilnehmen_Pflegemassnahme (Email, Pflegemassnahme)
+VALUES
+  ('johnsmith@example.com', 2);
 
 INSERT INTO Pflegemassnahme_kommt_vor_Pflegeprotokoll (Pflegemassnahme, Pflegeprotokoll, Erfolg)
 VALUES
