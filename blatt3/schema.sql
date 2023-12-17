@@ -1,3 +1,12 @@
+/* auskommentiert, weil in der Konsole eingegeben wie in der Aufgabenstellung
+PRAGMA auto_vacuum = 1;
+PRAGMA encoding = "UTF-8";
+PRAGMA foreign_keys = 1;
+PRAGMA journal_mode = WAL;
+PRAGMA synchronous = NORMAL;
+*/
+
+
 /*
 - Hat VARCHAR:
     - nicht die leere Zeichenkette enthalten ✅
@@ -23,10 +32,18 @@ CREATE TABLE IF NOT EXISTS Nutzer (
             AND Email LIKE '%_@%_.%_'
         ),
     Vorname VARCHAR(34)
-        COLLATE NOCASE,
+        COLLATE NOCASE NOT NULL
+        CHECK (
+            Vorname GLOB '[ -~]*'
+            AND Vorname  != ''
+        ),
 
     Nachname VARCHAR(34)
-        COLLATE NOCASE,
+        COLLATE NOCASE NOT NULL
+        CHECK (
+            Nachname GLOB '[ -~]*'
+            AND Nachname  != ''
+        ),
 
     Passwort VARCHAR(9) NOT NULL CHECK(
         (LENGTH(Passwort) BETWEEN 4 AND 8)
@@ -36,6 +53,23 @@ CREATE TABLE IF NOT EXISTS Nutzer (
         AND (Passwort NOT GLOB '*[^ -~]*')
     ),
     PRIMARY KEY (Email)
+);
+
+CREATE TABLE IF NOT EXISTS Wohnort (
+    ID INTEGER NOT NULL,
+    Stadt VARCHAR(256) COLLATE NOCASE NOT NULL
+         CHECK (
+            (Stadt NOT LIKE '%[^ -~]%')
+            AND (LENGTH(Stadt)>0)
+        ),
+    Strasse VARCHAR(256) COLLATE NOCASE NOT NULL
+         CHECK (
+            (Strasse NOT LIKE '%[^ -~]%')
+            AND (LENGTH(Strasse)>0)
+        ),
+    Hausnummer INTEGER NOT NULL,
+    PLZ INTEGER NOT NULL,
+    PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS Buerger (
@@ -58,15 +92,6 @@ CREATE TABLE IF NOT EXISTS Gaertner (
     FOREIGN KEY (Email) REFERENCES Nutzer (Email)
     ON UPDATE CASCADE
     ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS Wohnort (
-    ID INTEGER NOT NULL,
-    Stadt VARCHAR(256) COLLATE NOCASE NOT NULL,
-    Strasse VARCHAR(256) COLLATE NOCASE NOT NULL,
-    Hausnummer VARCHAR(5) COLLATE NOCASE NOT NULL,
-    PLZ INTEGER NOT NULL,
-    PRIMARY KEY (ID)
 );
 
 CREATE TABLE IF NOT EXISTS Pflegeart (
@@ -113,17 +138,15 @@ CREATE TABLE IF NOT EXISTS Pflegeprotokoll (
 
 CREATE TABLE IF NOT EXISTS Standort (
     ID INTEGER NOT NULL,
-    Breitengrad VARCHAR(256)
-        COLLATE NOCASE
+    Breitengrad DOUBLE
         NOT NULL,
-    Laengengrad VARCHAR(256)
-        COLLATE NOCASE
+    Laengengrad DOUBLE
         NOT NULL,
     PRIMARY KEY (ID)
 );
 
 
-
+/* Die Bezeichnung der Pflanzentyp besteht nur aus Zeichen des lateinischen Alphabets. ✅ */
 CREATE TABLE IF NOT EXISTS Pflanzentyp (
     ID INTEGER NOT NULL,
     Typ VARCHAR(256)
@@ -137,11 +160,18 @@ CREATE TABLE IF NOT EXISTS Pflanzentyp (
     PRIMARY KEY (ID)
 );
 
-/* Die Bezeichnung der Pflanzentyp besteht nur aus Zeichen des lateinischen Alphabets. ✅ */
 CREATE TABLE IF NOT EXISTS Pflanze (
     ID INTEGER NOT NULL,
-    'lateinische Bezeichnung' VARCHAR(256) COLLATE NOCASE NOT NULL,
-    'deutsche Bezeichnung' VARCHAR(256) COLLATE NOCASE NOT NULL,
+    lateinische_Bezeichnung VARCHAR(256) COLLATE NOCASE NOT NULL
+         CHECK (
+            (lateinische_Bezeichnung NOT LIKE '%[^ -~]%')
+            AND (LENGTH(lateinische_Bezeichnung)>0)
+        ),
+    deutsche_Bezeichnung VARCHAR(256) COLLATE NOCASE NOT NULL
+         CHECK (
+            (deutsche_Bezeichnung NOT LIKE '%[^ -~]%')
+            AND (LENGTH(deutsche_Bezeichnung)>0)
+        ),
     Email VARCHAR(256)
         COLLATE NOCASE
         NOT NULL,
@@ -159,7 +189,11 @@ CREATE TABLE IF NOT EXISTS Bild (
     ID INTEGER NOT NULL,
     Bildpfad VARCHAR(256)
         COLLATE NOCASE
-        NOT NULL,
+        NOT NULL
+         CHECK (
+            (Bildpfad NOT LIKE '%[^ -~]%')
+            AND (LENGTH(Bildpfad)>0)
+        ),
     Pflanze INTEGER
         NOT NULL,
     PRIMARY KEY (ID),
