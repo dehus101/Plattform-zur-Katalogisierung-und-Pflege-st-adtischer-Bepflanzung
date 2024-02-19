@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:sqlite:data/database.db
+
+logging:
+  level:
+    org.springframework: debug

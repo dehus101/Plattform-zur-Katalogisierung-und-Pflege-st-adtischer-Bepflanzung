@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Datenbanken: Weiterführende Konzepte - Praktisches Projekt - Blatt 2</title>
+    <meta charset="UTF-8">
+    <link href="css/rm.css" rel="stylesheet">
+    <script src="js/rm.js"></script>
+</head>
+<body>
+<h1>dehus101</h1>
+<rm-model name="Relationenmodell vor Verschmelzung">
+    <rm-schema name="Nutzer">
+        <rm-primary-key>
+            <rm-attribute>Email</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Vorname</rm-attribute>
+        <rm-attribute>Nachname</rm-attribute>
+        <rm-attribute>Passwort</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Buerger">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Gaertner">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Wohnort">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Stadt</rm-attribute>
+        <rm-attribute>Strasse</rm-attribute>
+        <rm-attribute>Hausnummer</rm-attribute>
+        <rm-attribute>PLZ</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme">
+        <rm-primary-key>
+                <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Datum</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflegeart">
+        <rm-primary-key>
+                <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Art</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflegeprotokoll">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Pflanze">
+        <rm-primary-key>
+                <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>lateinische Bezeichnung</rm-attribute>
+        <rm-attribute>deutsche Bezeichnung</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Standort">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Breitengrad</rm-attribute>
+        <rm-attribute>Laengengrad</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflanzentyp">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Typ</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Bild">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Bildpfad</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Spezialisierung">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Name</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Buerger_hat_Wohnort">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Buerger.Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Wohnort.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Buerger_teilnehmen_Pflegemassnahme">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Buerger.Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+        </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_referenzieren">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme1.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflegemassnahme2.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_gehoert_zu_Pflegeart">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflegeart.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_kommt_vor_Pflegeprotokoll">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflegeprotokoll.ID</rm-attribute>
+        </rm-foreign-key>
+        </rm-primary-key>
+        <rm-attribute>Erfolg</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Gaertner_bewertet_Pflegemassnahme">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+        </rm-primary-key>
+        <rm-attribute>Skala</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Gaertner_teilnehmen_an_Pflegemassnahme">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_versorgt_Pflanze">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflanze.ID</rm-attribute>
+        </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Gaertner_erstellt_Pflegeprotokoll">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegeprotokoll.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Buerger_traegt_ein_Pflanze">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflanze.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Buerger.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Gaertner_pflanzt_Pflanze">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflanze.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+        <rm-attribute>Pflanzdatum</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflanze_hat_Standort">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflanze.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Standort.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflanze_gehoert_zu_Pflanzentyp">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflanze.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflanzentyp.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflanze_speichert_Bild">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Bild.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflanze.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Gaertner_hat_Spezialisierung">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Spezialisierung.ID</rm-attribute>
+        </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+</rm-model>
+<rm-model name="Relationenmodell nach Verschmelzung">
+    <rm-schema name="Nutzer">
+        <rm-primary-key>
+            <rm-attribute>Email</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Vorname</rm-attribute>
+        <rm-attribute>Nachname</rm-attribute>
+        <rm-attribute>Passwort</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Buerger">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Wohnort.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Gaertner">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Wohnort">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Stadt</rm-attribute>
+        <rm-attribute>Strasse</rm-attribute>
+        <rm-attribute>Hausnummer</rm-attribute>
+        <rm-attribute>PLZ</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Datum</rm-attribute>
+        <rm-foreign-key>
+            <rm-attribute>Pflegeart.ID</rm-attribute>
+        </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflegeart">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Art</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflegeprotokoll">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflanze">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>lateinische Bezeichnung</rm-attribute>
+        <rm-attribute>deutsche Bezeichnung</rm-attribute>
+        <rm-foreign-key>
+            <rm-attribute>Buerger.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Standort.ID</rm-attribute>
+        </rm-foreign-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflanzentyp.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Standort">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Breitengrad</rm-attribute>
+        <rm-attribute>Laengengrad</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflanzentyp">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Typ</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Bild">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Bildpfad</rm-attribute>
+        <rm-foreign-key>
+            <rm-attribute>Pflanze.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Spezialisierung">
+        <rm-primary-key>
+            <rm-attribute>ID</rm-attribute>
+        </rm-primary-key>
+        <rm-attribute>Name</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Buerger_teilnehmen_Pflegemassnahme">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Buerger.Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_referenzieren">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme1.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Pflegemassnahme2.ID</rm-attribute>
+        </rm-foreign-key>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_kommt_vor_Pflegeprotokoll">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegeprotokoll.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-attribute>Erfolg</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Gaertner_bewertet_Pflegemassnahme">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+            <rm-foreign-key>
+                <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-attribute>Skala</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Pflegemassnahme_versorgt_Pflanze">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflegemassnahme.ID</rm-attribute>
+            </rm-foreign-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflanze.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+    <rm-schema name="Gaertner_pflanzt_Pflanze">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Pflanze.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+        <rm-foreign-key>
+            <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+        </rm-foreign-key>
+        <rm-attribute>Pflanzdatum</rm-attribute>
+    </rm-schema>
+    <rm-schema name="Gaertner_hat_Spezialisierung">
+        <rm-primary-key>
+            <rm-foreign-key>
+                <rm-attribute>Gaertner.Nutzer.Email</rm-attribute>
+            </rm-foreign-key>
+            <rm-foreign-key>
+                <rm-attribute>Spezialisierung.ID</rm-attribute>
+            </rm-foreign-key>
+        </rm-primary-key>
+    </rm-schema>
+</rm-model>
+</body>
+</html>
