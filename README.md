@@ -1,21 +1,6 @@
-# Datenbanken: Weiterführende Konzepte – Praktisches Projekt – Abgabe
-
-Dies ist die Vorlage zur Abgabe für das praktische Projekt im Modul "Datenbanken: Weitereführende Konzepte".
-
-## Einrichtung
-
-Es muss **mindestens Java 8** installiert sein.
-
-Zur besseren Handhabung sollte dieses Repository als Gradle-Projekt in eine IDE importiert werden.
-
-## Hinweise
-
-Die Aufgabenstellung finden Sie im Repository des entsprechenden Blatts.
-
-Kritische Entscheidungen zu den einzelnen Blättern listen Sie bitte in der `README` im zum entsprechenden Blatt zugehörigen Ordner auf.
-
-Die Abgabe erfolgt bei jedem Push in Ihr Repository per CI/CD.
-
-Der Stand Ihres Forks sollte ohne Ihre Änderungen dem Stand des Upstreams entsprechen. Ansonsten müssen Sie Ihren Fork aktualisieren.
-
-![.img/update-fork.png](.img/update-fork.png "Fork aktualisieren")
+Im Laufe des praktischen Projekts sollen Sie ein System Plattform-zur-Katalogisierung-und-Pflege-st-adtischer-Bepflanzung
+ entwickeln. Die Entwicklung dieses Projekts soll dabei in vier Schritten ablaufen:
+1. Phase: Erstellen eines ER-Modells der Datenbank
+2. Phase: Uberf ¨ uhrung des ER-Modells in ein Relationenmodell ¨
+3. Phase: Implementierung der Datenbank im vorgegebenen SQL-Dialekt
+4. Phase: Umsetzung eines dazugeh¨origen RESTful Web Services
